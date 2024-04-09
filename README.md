@@ -12,12 +12,12 @@ POST `/api/account` or POST `api/user`
 Allow you to submit a new data.  
   
 The request body needs to be in JSON format and include the following properties:  
-Account  
+**Account ** 
 - idAccount - Long  
 - username -  String  
 - password - String
 
-Example  
+**Example**  
 POST /api/account  
 {  
         "idAccount": 1,  
@@ -25,14 +25,14 @@ POST /api/account
         "password": "1232"  
 }  
 
-User:  
+**User**  
 - idUser - Long  
 - name - String  
 - address - String  
 - email - String  
 - phoneNumber - String  
   
-POST /api/user  
+**POST /api/user**  
 {  
         "idUser": 1,  
         "name": "Dang Thai Binh",  
@@ -43,11 +43,11 @@ POST /api/user
 
 ### Update Data
 PUT `/api/account/{accountID}?attribute1=value?attribute2=value` or PUT `/api/user{userID}?attribute1=value?attribute2=value`  
-Example  
+**Example**  
 PUT `http://localhost:8080/api/user/1?name=john`  
 PUT `http://localhost:8080/api/account/1?password=12345678`  
 
 ### Delete Data
 DELETE `/api/account/{accountID}` or DELETE `/api/user/{userId}`  
-Example  
-DELETE http://localhost:8080/api/user/1  
+**Example**  
+DELETE `http://localhost:8080/api/user/1`  
