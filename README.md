@@ -1,7 +1,9 @@
 # API_Project_TakeSample
 
-## Endpoints
-âss
+## account, user
+
+### status 
+GET`/api/acount`
 
 
 
