@@ -8,7 +8,7 @@ Returns list of data
 
 
 ### Create a new data
-POST `/api/account` or POST `api/user`
+POST `/api/account` or POST `api/user` 
 Allow you to submit a new data. 
 
 The request body needs to be in JSON format and include the following properties:
