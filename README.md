@@ -39,4 +39,15 @@ POST /api/user
         "address": "Can Tho",  
         "email": "dthaibinh03@gmail.com",  
         "phoneNumber": "0939464077"  
-}  
+}   
+
+### Update Data
+PUT `/api/account/{accountID}?attribute1=value?attribute2=value` or PUT `/api/user{userID}?attribute1=value?attribute2=value`  
+Example  
+PUT `http://localhost:8080/api/user/1?name=john`  
+PUT `http://localhost:8080/api/account/1?password=12345678`  
+
+### Delete Data
+DELETE `/api/account/{accountID}` or DELETE `/api/user/{userId}`  
+Example  
+DELETE http://localhost:8080/api/user/1  
