@@ -3,7 +3,7 @@
 ## account, user
 
 ### List of data
-GET `/api/acount` or GET `/api/user` 
+GET `/api/acount` or GET `/api/user`  
 Returns list of data
 
 
