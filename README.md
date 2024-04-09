@@ -1,2 +1,80 @@
 # API_Project_TakeSample
-provide data
+
+## account, user, project
+
+### List of data
+GET `/api/acount`  
+GET `/api/user`  
+GET `/api/project`  
+Returns list of data
+
+
+### Create a new data
+POST `/api/account`  
+POST `api/user`  
+POST `api/project`  
+Allow you to submit a new data.  
+  
+The request body needs to be in JSON format and include the following properties:  
+**Account**  
+- idAccount - Long  
+- username -  String -use phonenumber to engage  
+- password - String
+
+**Example**  
+POST /api/account  
+{  
+        "idAccount": 1,  
+        "username": "0939464077",  
+        "password": "1232"  
+}  
+
+**User**  
+- idUser - Long  
+- name - String  
+- address - String  
+- email - String  
+- phoneNumber - String  
+  
+**POST /api/user**  
+
+{  
+        "idUser": 1,  
+        "name": "Dang Thai Binh",  
+        "address": "Can Tho",  
+        "email": "dthaibinh03@gmail.com",  
+        "phoneNumber": "0939464077"  
+}   
+
+**Project**  
+- idProject - Long  
+- projectName -  String   
+- researchMethod - String
+- describe - String
+- dateCreate - LocalDate
+
+**POST /api/user**  
+
+{  
+        "idProject": 1,
+        "projectName": "tui",
+        "researchMethod": "thu nghiem lam san",
+        "describe": "chat tay",
+        "dateCreate": "2024-04-06"  
+}   
+
+### Update Data
+PUT `/api/account/{accountID}?attribute1=value?attribute2=value`  
+PUT `/api/user{userID}?attribute1=value?attribute2=value`  
+PUT `/api/user{project}?attribute1=value?attribute2=value`
+**Example**  
+PUT `http://localhost:8080/api/user/1?name=john`  
+PUT `http://localhost:8080/api/account/1?password=12345678`  
+PUT `http://localhost:8080/api/project/1?projectName=test`  
+
+### Delete Data
+DELETE `/api/account/{accountID}`  
+DELETE `/api/user/{userId}`  
+DELETE `/api/user/{projectId}`  
+**Example**  
+DELETE `http://localhost:8080/api/user/1`  
