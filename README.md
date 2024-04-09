@@ -37,6 +37,7 @@ POST /api/account
 - phoneNumber - String  
   
 **POST /api/user**  
+
 {  
         "idUser": 1,  
         "name": "Dang Thai Binh",  
@@ -50,7 +51,17 @@ POST /api/account
 - projectName -  String   
 - researchMethod - String
 - describe - String
-- dateCreate - LocalDate  
+- dateCreate - LocalDate
+
+**POST /api/user**  
+
+{  
+        "idProject": 1,
+        "projectName": "tui",
+        "researchMethod": "thu nghiem lam san",
+        "describe": "chat tay",
+        "dateCreate": "2024-04-06"  
+}   
 
 ### Update Data
 PUT `/api/account/{accountID}?attribute1=value?attribute2=value`  
