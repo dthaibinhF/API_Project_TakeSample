@@ -12,7 +12,7 @@ POST `/api/account` or POST `api/user`
 Allow you to submit a new data.  
   
 The request body needs to be in JSON format and include the following properties:  
-**Account ** 
+**Account**  
 - idAccount - Long  
 - username -  String  
 - password - String
