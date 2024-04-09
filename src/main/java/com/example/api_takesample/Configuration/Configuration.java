@@ -2,9 +2,11 @@ package com.example.api_takesample.Configuration;
 
 import com.example.api_takesample.Model.Account;
 import com.example.api_takesample.Model.Project;
+import com.example.api_takesample.Model.Task;
 import com.example.api_takesample.Model.User;
 import com.example.api_takesample.Repository.AccountRepository;
 import com.example.api_takesample.Repository.ProjectRepository;
+import com.example.api_takesample.Repository.TaskRepository;
 import com.example.api_takesample.Repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +22,8 @@ public class Configuration {
     CommandLineRunner commandLineRunner(
             AccountRepository accountRepository,
             UserRepository userRepository,
-            ProjectRepository projectRepository) {
+            ProjectRepository projectRepository,
+            TaskRepository taskRepository) {
         return args -> {
             Account first = new Account(
                     "0939464077",
@@ -61,6 +64,22 @@ public class Configuration {
 
             projectRepository.saveAll(
                     List.of(test)
+            );
+
+            Task task1 = new Task(
+                    LocalDate.of(2024, Month.APRIL, 7),
+                    LocalDate.of(2024, Month.APRIL, 10),
+                    "Complete the API"
+            );
+
+            Task task2 = new Task(
+                    LocalDate.of(2024, Month.APRIL, 13),
+                    LocalDate.of(2024, Month.APRIL, 18),
+                    "Complete the Interface"
+            );
+
+            taskRepository.saveAll(
+                    List.of(task1, task2)
             );
 
         };
