@@ -14,7 +14,7 @@ Allow you to submit a new data.
 The request body needs to be in JSON format and include the following properties:  
 **Account**  
 - idAccount - Long  
-- username -  String  
+- username -  String -use phonenumber to engage  
 - password - String
 
 **Example**  
