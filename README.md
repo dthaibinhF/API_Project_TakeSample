@@ -1,12 +1,15 @@
 # API_Project_TakeSample
 
-## account, user, project
+## account, user, project, sample, picture, form,
 
 ### List of data
 GET `/api/acount`  
 GET `/api/user`  
 GET `/api/project`  
 GET `/api/task`  
+GET `/api/sample`  
+GET `/api/picture`  
+GET `/api/form`  
 Returns list of data
 
 
@@ -15,6 +18,9 @@ POST `/api/account`
 POST `api/user`  
 POST `api/project`  
 POST `api/task`  
+POST `api/sample`  
+POST `api/picture`  
+POST `api/form`  
 Allow you to submit a new data.  
   
 The request body needs to be in JSON format and include the following properties:  
@@ -80,21 +86,78 @@ POST /api/account
         "direction": "Complete the API" 
 }   
 
+**Sample**  
+- idSample - Long  
+- nameSample -  String   
+- createDate - LocalDate
+
+
+**POST /api/sample**  
+
+{  
+        "idSample": 1,
+        "nameSample": "Mau cay trong",
+        "createDate": "2024-01-01"
+}   
+
+**Picture**  
+- idPicture - Long  
+- namePicture -  String   
+- describe - String
+- url - String  
+
+
+**POST /api/picture**  
+
+{  
+        "idPicture": 1,
+        "namePicture": "anh 1",
+        "describe": "cay a",
+        "url": "https//:ascascsc"
+}   
+
+
+**Form**  
+- idForm - Long  
+- nameForm -  String   
+- LocalDate - LocalDate
+- url - String  
+
+
+**POST /api/form**  
+
+{  
+        "idForm": 1,
+        "nameForm": "thu thap yeu cau",
+        "createDate": "2024-04-01",
+        "url": "https//:asasd"
+}   
+
+
 ### Update Data
 PUT `/api/account/{accountID}?attribute1=value&attribute2=value`  
 PUT `/api/user{userID}?attribute1=value&attribute2=value`  
 PUT `/api/user{projectId}?attribute1=value&attribute2=value`  
 PUT `/api/user{taskId}?attribute1=value&attribute2=value`  
+PUT `/api/user{sampleId}?attribute1=value&attribute2=value`  
+PUT `/api/user{pictureId}?attribute1=value&attribute2=value`  
+PUT `/api/user{formId}?attribute1=value&attribute2=value`  
 **Example**  
 PUT `http://localhost:8080/api/user/1?name=john`  
 PUT `http://localhost:8080/api/account/1?password=12345678`  
 PUT `http://localhost:8080/api/project/1?projectName=test`  
-PUT `[http://localhost:8080/api/project/1?projectName=test](http://localhost:8080/api/task/3?startTime=2024-04-10&deadline=2024-04-13)`  
+PUT `http://localhost:8080/api/task/3?startTime=2024-04-10&deadline=2024-04-13`  
+PUT `http://localhost:8080/api/picture/3?namePicture=thai Son&describe=test`  
+PUT `http://localhost:8080/api/sample/3?nameSample=hoa muoi gio`  
+PUT `http://localhost:8080/api/form/2?url=https//:somthing`  
 
 ### Delete Data
 DELETE `/api/account/{accountID}`  
 DELETE `/api/user/{userId}`  
 DELETE `/api/user/{projectId}`  
 DELETE `/api/user/{taskId}   
+DELETE `/api/user/{sampleId}   
+DELETE `/api/user/{pictureId}   
+DELETE `/api/user/{form}   
 **Example**  
 DELETE `http://localhost:8080/api/user/1`  
