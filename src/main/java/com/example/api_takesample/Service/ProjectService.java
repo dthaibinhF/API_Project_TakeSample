@@ -31,7 +31,7 @@ public class ProjectService {
                 .findById(project.getIdProject());
         if (projectOptional.isPresent())
             throw new IllegalStateException(
-                    "Id project have existed"
+                    "Id project taken"
             );
         projectRepository.save(project);
     }

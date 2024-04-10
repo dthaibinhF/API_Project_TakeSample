@@ -1,13 +1,7 @@
 package com.example.api_takesample.Configuration;
 
-import com.example.api_takesample.Model.Account;
-import com.example.api_takesample.Model.Project;
-import com.example.api_takesample.Model.Task;
-import com.example.api_takesample.Model.User;
-import com.example.api_takesample.Repository.AccountRepository;
-import com.example.api_takesample.Repository.ProjectRepository;
-import com.example.api_takesample.Repository.TaskRepository;
-import com.example.api_takesample.Repository.UserRepository;
+import com.example.api_takesample.Model.*;
+import com.example.api_takesample.Repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
@@ -23,7 +17,10 @@ public class Configuration {
             AccountRepository accountRepository,
             UserRepository userRepository,
             ProjectRepository projectRepository,
-            TaskRepository taskRepository) {
+            TaskRepository taskRepository,
+            PictureRepository pictureRepository,
+            FormRepository formRepository,
+            SampleRepository sampleRepository) {
         return args -> {
             Account first = new Account(
                     "0939464077",
@@ -82,6 +79,57 @@ public class Configuration {
                     List.of(task1, task2)
             );
 
+            Picture pic1 = new Picture(
+                    "anh 1",
+                    "cay a",
+                    "https//:ascascsc"
+            );
+
+            Picture pic2 = new Picture(
+                    "anh 2",
+                    "cay C",
+                    "https//:abcdef"
+            );
+
+            pictureRepository.saveAll(
+                    List.of(
+                            pic1, pic2
+                    )
+            );
+
+            Form form1 = new Form(
+                    "thu thap yeu cau",
+                    LocalDate.of(2024, Month.APRIL, 1),
+                    "https//:asasd"
+            );
+
+            Form form2 = new Form(
+                    "thu thap yeu cau",
+                    LocalDate.of(2024, Month.MARCH, 1),
+                    "https//:asasd"
+            );
+
+            formRepository.saveAll(
+                    List.of(
+                            form1,form2
+                    )
+            );
+
+            Sample sample1 = new Sample(
+                    "Mau cay trong",
+                    LocalDate.of(2024, Month.JANUARY, 1)
+            );
+
+            Sample sample2 = new Sample(
+                    "Mau cay lua",
+                    LocalDate.of(2024, Month.FEBRUARY, 1)
+            );
+
+            sampleRepository.saveAll(
+                    List.of(
+                            sample1, sample2
+                    )
+            );
         };
     }
 }

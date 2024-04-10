@@ -14,7 +14,7 @@ public class Form {
             allocationSize = 1
     )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
+            strategy = GenerationType.AUTO,
             generator = "form_sequence"
     )
     private Long idForm;

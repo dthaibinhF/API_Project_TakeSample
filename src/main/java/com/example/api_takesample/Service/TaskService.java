@@ -32,7 +32,7 @@ public class TaskService {
 
         if (taskOptional.isPresent())
             throw new IllegalStateException(
-                    "Task id have exist"
+                    "Task id have taken"
             );
         taskRepository.save(task);
     }
