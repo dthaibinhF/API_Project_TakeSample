@@ -155,169 +155,221 @@ Change information of exist project.
 
 Example:
 ```
-/api/project/:1?projectName=project1&researchMethod=anything&describe=something&dateCreate=2024-04-04
+PUT /api/project/:1?projectName=project1&researchMethod=anything&describe=something&dateCreate=2024-04-04
 ```
 
 ## Task
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## account, user, project, sample, picture, form, task
-
-### List of data
-GET `/api/acount`  
-GET `/api/user`  
-GET `/api/project`  
+### List of Tasks
 GET `/api/task`  
+Return a list of tasks.
+
+### Get single task
+GET `api/task/:taskId`  
+Return details of task.
+
+### Adding new task to porject
+POST `/api/task/:projectid`
+Allow you to add new task to specific exits project.
+
+The request body needs to be in JSON format and include the following properties:
+- `idTask` - Long  
+- `startTime` - LocalDate - FORMMAT: YYYY-MM-DD  
+- `deadline` - LocalDate - FORMMAT: YYYY-MM-DD    
+- `direction` - String
+
+Example:
+```
+adding a task (id 7) to project (id 1).
+POST /api/task/1
+{  
+"idTask": 7,
+    "startTime": "2024-03-01",
+    "deadline": "2024-01-02",
+    "direction": "Pulish project"
+}   
+```
+
+### Delete Task
+DELETE `api/task/:taskId`
+Delete an existing task. 
+
+The request body needs to be empty.  
+
+Example:
+```
+DELETE api/task/2
+```
+### Update Task's Information
+PUT `/api/task/:taskId?startTime=&deadline=&direction=`
+Change information of exist task.
+
+- `idTask` - Long  
+- `startTime` - LocalDate - FORMMAT: YYYY-MM-DD  
+- `deadline` - LocalDate - FORMMAT: YYYY-MM-DD    
+- `direction` - String
+
+Example:
+```
+PUT /api/task/:taskId?startTime=&deadline=2024-12-14&direction=setting
+```
+
+### Sample
+### List of Samples
 GET `/api/sample`  
+Return a list of samples.
+
+### Get single sample
+GET `api/sample/:sampleId`  
+Return details of sample.
+
+### Adding new sample to porject
+POST `/api/sample/:projectid`
+Allow you to add new sample to specific exits project.
+
+The request body needs to be in JSON format and include the following properties:
+- `idSample` - Long
+- - `nameSample` - String
+- `createDate` - LocalDate - FORMMAT: YYYY-MM-DD
+
+Example:
+```
+adding a sample (id 5) to project (id 1).
+POST /api/sample/1
+{  
+    "idSample": 5,
+    "nameSample": "Sample5",
+    "createDate": "2024-04-26"
+}   
+```
+
+### Delete sample
+DELETE `api/sample/:sampleId`
+Delete an existing sample. Just delete after delete children (form, picture).
+
+The request body needs to be empty.  
+
+Example:
+```
+DELETE api/sample/2
+```
+### Update Sample's Information
+PUT `/api/sample/:sampleId?nameSample=&createDate=`
+Change information of exist sample.
+
+- `idSample` - Long
+- - `nameSample` - String
+- `createDate` - LocalDate - FORMMAT: YYYY-MM-DD
+
+Example:
+```
+PUT api/sample/:sampleId?nameSample=sample1&createDate=
+```
+
+### Picture
+### List of pictures
 GET `/api/picture`  
-GET `/api/form`  
-Returns list of data
+Return a list of pictures.
 
+### Get single picture
+GET `api/picture/:pictureId`  
+Return details of picture.
 
-### Create a new data
-POST `/api/account`  
-POST `api/user`  
-POST `api/project`  
-POST `api/task`  
-POST `api/sample`  
-POST `api/picture`  
-POST `api/form`  
-Allow you to submit a new data.  
-  
-The request body needs to be in JSON format and include the following properties:  
-**Account**  
-- idAccount - Long  
-- username -  String -use phonenumber to engage  
-- password - String
+### Adding new picture to sample
+POST `/api/picture/:sampleId`
+Allow you to add new picture to specific exits sample.
 
-**Example**  
-POST /api/account  
+The request body needs to be in JSON format and include the following properties:
+- `idPicture` - Long
+- `namePicture` - String
+- `describe` - String
+- `url` - String  
+Example:
+```
+adding a picture (id 5) to sample (id 1).
+POST /api/picture/1
 {  
-        "idAccount": 1,  
-        "username": "0939464077",  
-        "password": "1232"  
-}  
-
-**User**  
-
-
-**Project**  
-- idProject - Long  
-- projectName -  String   
-- researchMethod - String
-- describe - String
-- dateCreate - LocalDate
-
-**POST /api/project**  
-
-{  
-        "idProject": 1,
-        "projectName": "tui",
-        "researchMethod": "thu nghiem lam san",
-        "describe": "chat tay",
-        "dateCreate": "2024-04-06"  
+    "idPicture": 5, 
+    "namePicture": "Picture 5",
+    "describe": "save to sample 1",
+    "url": "https://pic5"
 }   
+```
 
-**Task**  
-- idTask - Long  
-- startTime -  LocalDate   
-- deadline - LocalDate
-- directiom - String
+### Delete picture
+DELETE `api/picture/:pictureId`
+Delete an existing picture.
 
-**POST /api/task**  
+The request body needs to be empty.  
 
+Example:
+```
+DELETE api/picture/2
+```
+### Update picture's Information
+PUT `/api/picture/:pictureId?namePicture=&describe=&url=`
+Change information of exist sample.
+
+- `idPicture` - Long
+- `namePicture` - String
+- `describe` - String
+- `url` - String  
+
+Example:
+```
+PUT /api/picture/:pictureId?namePicture=&describe=something else&url=urlkey
+```
+
+### Form
+### List of forms
+GET `/api/forms`  
+Return a list of forms.
+
+### Get single form
+GET `api/form/:formId`  
+Return details of form.
+
+### Adding new form to sample
+POST `/api/form/:form`
+Allow you to add new picture to specific exits sample.
+
+The request body needs to be in JSON format and include the following properties:
+- `idForm` - Long
+- `nameForm` - String
+- `createDate` - LocalDate - FORMMAT: YYYY-MM-DD
+- `url` - String  
+Example:
+```
+adding a picture (id 5) to sample (id 1).
+POST /api/picture/1
 {  
-        "idTask": 1,
-        "startTime": "2024-04-07",
-        "deadline": "2024-04-10",
-        "direction": "Complete the API" 
+    "idForm": 5,
+    "nameForm": "form5",
+    "createDate": "2024-03-28",
+    "url": "https://form/form5"
 }   
+```
 
-**Sample**  
-- idSample - Long  
-- nameSample -  String   
-- createDate - LocalDate
+### Delete form
+DELETE `api/form/:formId`
+Delete an existing form.
 
+The request body needs to be empty.  
 
-**POST /api/sample**  
+Example:
+```
+DELETE api/form/2
+```
 
-{  
-        "idSample": 1,
-        "nameSample": "Mau cay trong",
-        "createDate": "2024-01-01"
-}   
+### Update from's Information
+PUT `api/form/:formId?nameForm=&createDate=&url=`
+Change information of exist sample.
 
-**Picture**  
-- idPicture - Long  
-- namePicture -  String   
-- describe - String
-- url - String  
+- `idForm` - Long
+- `nameForm` - String
+- `createDate` - LocalDate - FORMMAT: YYYY-MM-DD
+- `url` - String  
 
-
-**POST /api/picture**  
-
-{  
-        "idPicture": 1,
-        "namePicture": "anh 1",
-        "describe": "cay a",
-        "url": "https//:ascascsc"
-}   
-
-
-**Form**  
-- idForm - Long  
-- nameForm -  String   
-- LocalDate - LocalDate
-- url - String  
-
-
-**POST /api/form**  
-
-{  
-        "idForm": 1,
-        "nameForm": "thu thap yeu cau",
-        "createDate": "2024-04-01",
-        "url": "https//:asasd"
-}   
-
-
-### Update Data
-PUT `/api/account/{accountID}?attribute1=value&attribute2=value`  
-PUT `/api/user{userID}?attribute1=value&attribute2=value`  
-PUT `/api/user{projectId}?attribute1=value&attribute2=value`  
-PUT `/api/user{taskId}?attribute1=value&attribute2=value`  
-PUT `/api/user{sampleId}?attribute1=value&attribute2=value`  
-PUT `/api/user{pictureId}?attribute1=value&attribute2=value`  
-PUT `/api/user{formId}?attribute1=value&attribute2=value`  
-**Example**  
-PUT `http://localhost:8080/api/user/1?name=john`  
-PUT `http://localhost:8080/api/account/1?password=12345678`  
-PUT `http://localhost:8080/api/project/1?projectName=test`  
-PUT `http://localhost:8080/api/task/3?startTime=2024-04-10&deadline=2024-04-13`  
-PUT `http://localhost:8080/api/picture/3?namePicture=thai Son&describe=test`  
-PUT `http://localhost:8080/api/sample/3?nameSample=hoa muoi gio`  
-PUT `http://localhost:8080/api/form/2?url=https//:somthing`  
-
-### Delete Data
-DELETE `/api/account/{accountID}`  
-DELETE `/api/user/{userId}`  
-DELETE `/api/user/{projectId}`  
-DELETE `/api/user/{taskId}   
-DELETE `/api/user/{sampleId}   
-DELETE `/api/user/{pictureId}   
-DELETE `/api/user/{form}   
-**Example**  
-DELETE `http://localhost:8080/api/user/1`  
+Example:
+```
+PUT //api/form/:formId?nameForm=Form 5&createDate=2024-04-12&url=
+```
