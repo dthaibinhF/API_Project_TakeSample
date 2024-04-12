@@ -23,9 +23,21 @@ public class PictureController {
         return picturService.getPicture();
     }
 
-    @PostMapping
-    public void registerPicture(@RequestBody Picture picture) {
-        picturService.addNewPicture(picture);
+    @GetMapping("{pictureId}")
+    public List<Picture> getPictureById(@PathVariable Long pictureId) {
+        return picturService.getPictureById(pictureId);
+    }
+
+    @GetMapping("/sample/{sampleId}")
+    public List<Picture> getPictureBySampleId(@PathVariable Long sampleId) {
+        return picturService.getPictureBySampleId(sampleId);
+    }
+
+    @PostMapping("/{sampleId}")
+    public void registerPictureInSample(
+            @PathVariable Long sampleId,
+            @RequestBody Picture picture) {
+        picturService.addNewPictureInSample(sampleId, picture);
     }
 
     @DeleteMapping(path = "{pictureId}")

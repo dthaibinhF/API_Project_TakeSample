@@ -1,9 +1,12 @@
 package com.example.api_takesample.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
+@Getter
 @Entity
 @Table
 public class Form {
@@ -22,6 +25,11 @@ public class Form {
     private LocalDate createDate;
     private String url;
 
+    @ManyToOne
+    @JoinColumn(name = "sample_id")
+    @JsonIgnoreProperties({"forms", "project", "pictures"})
+    private Sample sample;
+
     public Form() {
 
     }
@@ -39,31 +47,30 @@ public class Form {
         this.url = url;
     }
 
-    public Long getIdForm() {
-        return idForm;
-    }
-
-    public String getNameForm() {
-        return nameForm;
+    public Form(String nameForm, LocalDate createDate, String url, Sample sample) {
+        this.nameForm = nameForm;
+        this.createDate = createDate;
+        this.url = url;
+        this.sample = sample;
     }
 
     public void setNameForm(String nameForm) {
         this.nameForm = nameForm;
     }
 
-    public LocalDate getCreateDate() {
-        return createDate;
-    }
-
     public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public void setIdForm(Long idForm) {
+        this.idForm = idForm;
+    }
+
+    public void setSample(Sample sample) {
+        this.sample = sample;
     }
 }

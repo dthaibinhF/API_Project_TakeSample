@@ -1,7 +1,9 @@
 package com.example.api_takesample.Service;
 
 import com.example.api_takesample.Model.Project;
+import com.example.api_takesample.Model.User;
 import com.example.api_takesample.Repository.ProjectRepository;
+import com.example.api_takesample.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +18,15 @@ import java.util.Optional;
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final UserRepository userRepository;
+
+    public ProjectService(ProjectRepository projectRepository, UserRepository userRepository) {
+        this.projectRepository = projectRepository;
+        this.userRepository = userRepository;
+    }
 
     @Autowired
-    public ProjectService(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
-    }
+
 
     public List<Project> getProject() {
         return projectRepository.findAll();
@@ -77,5 +83,36 @@ public class ProjectService {
                 !Objects.equals(project.getDateCreate(), dateCreate)) {
             project.setDateCreate(dateCreate);
         }
+    }
+
+    public List<Project> getProjectById(Long projectId) {
+        boolean exist = projectRepository.existsById(projectId);
+        if (!exist) throw new IllegalStateException(
+                "Id project " + projectId + " does not exits"
+        );
+        return projectRepository.findByIdProject(projectId);
+    }
+
+    @Transactional
+    public Project addUserToProject(Long userId, Long projectId) {
+        userRepository.findById(userId).orElseThrow(
+                () -> new IllegalStateException(
+                        "User with id " + userId + " does not exist"
+                )
+        );
+
+        projectRepository.findById(projectId).orElseThrow(
+                () -> new IllegalStateException(
+                        "Project with id " + projectId + " does not exist"
+                )
+        );
+
+        User user = userRepository.findById(userId).get();
+        Project project = projectRepository.findById(projectId).get();
+
+        List<Project> projectListOfUser = user.getProjects();
+        projectListOfUser.add(project);
+        user.setProjects(projectListOfUser);
+        return projectRepository.save(project);
     }
 }

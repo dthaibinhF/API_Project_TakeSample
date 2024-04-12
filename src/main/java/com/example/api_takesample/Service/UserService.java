@@ -1,6 +1,8 @@
 package com.example.api_takesample.Service;
 
+import com.example.api_takesample.Model.Account;
 import com.example.api_takesample.Model.User;
+import com.example.api_takesample.Repository.AccountRepository;
 import com.example.api_takesample.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +16,25 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, AccountRepository accountRepository) {
         this.userRepository = userRepository;
+        this.accountRepository = accountRepository;
     }
 
     public List<User> getUser() {
         return userRepository.findAll();
+    }
+
+
+    public List<User> getUserById(Long idUser) {
+        boolean exist = userRepository.existsById(idUser);
+        if (!exist) throw new IllegalStateException(
+                "Id user " + idUser + " does not exist"
+        );
+        return userRepository.findByIdUser(idUser);
     }
 
     public void deleteUser(Long userId) {
@@ -88,6 +101,10 @@ public class UserService {
             throw new IllegalStateException(
                     "phone number taken"
             );
+
+        Optional<Account> account = accountRepository.findByUsername(user.getPhoneNumber());
+        user.setAccount(account.get());
         userRepository.save(user);
     }
+
 }

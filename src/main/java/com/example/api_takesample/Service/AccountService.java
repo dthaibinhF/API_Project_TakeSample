@@ -67,4 +67,14 @@ public class AccountService {
         }
         return true;
     }
+
+    public List<Account> getAccountById(Long accountId) {
+        boolean exist = accountRepository
+                .existsById(accountId);
+        if (!exist) throw new IllegalStateException(
+                "Account with id " + accountId + " does not exist"
+        );
+
+        return accountRepository.findAccountByIdAccount(accountId);
+    }
 }

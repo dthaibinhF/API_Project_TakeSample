@@ -24,10 +24,23 @@ public class TaskController {
         return taskService.getTask();
     }
 
-    @PostMapping
-    public void registerTask(@RequestBody Task task) {
-        taskService.addNewTask(task);
+    @GetMapping("/{taskId}")
+    public List<Task> getTaskById(@PathVariable Long taskId) {
+        return taskService.getTaskById(taskId);
     }
+
+    @GetMapping("/project/{projectId}")
+    public List<Task> getTaskByProjectId(@PathVariable("projectId") Long projectId) {
+        return taskService.getTaskByProjectId(projectId);
+    }
+
+    @PostMapping("/{projectId}")
+    public void registerTask(
+            @PathVariable Long projectId,
+            @RequestBody Task task) {
+        taskService.addNewTask(projectId, task);
+    }
+
 
     @DeleteMapping(path = "{taskId}")
     public void deleteTask(@PathVariable("taskId") Long taskId) {

@@ -1,7 +1,12 @@
 package com.example.api_takesample.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Getter;
 
+import java.util.List;
+
+@Getter
 @Entity
 @Table
 public class Picture {
@@ -20,6 +25,11 @@ public class Picture {
     private String describe;
     private String url;
 
+    @ManyToOne
+    @JoinColumn(name = "sample_id")
+    @JsonIgnoreProperties({"pictures", "forms", "project"})
+    private Sample sample;
+
     public Picture() {
     }
 
@@ -36,31 +46,30 @@ public class Picture {
         this.url = url;
     }
 
-    public Long getIdPicture() {
-        return idPicture;
-    }
-
-    public String getNamePicture() {
-        return namePicture;
+    public Picture(String namePicture, String describe, String url, Sample sample) {
+        this.namePicture = namePicture;
+        this.describe = describe;
+        this.url = url;
+        this.sample = sample;
     }
 
     public void setNamePicture(String namePicture) {
         this.namePicture = namePicture;
     }
 
-    public String getDescribe() {
-        return describe;
-    }
-
     public void setDescribe(String describe) {
         this.describe = describe;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public void setIdPicture(Long idPicture) {
+        this.idPicture = idPicture;
+    }
+
+    public void setSample(Sample sample) {
+        this.sample = sample;
     }
 }

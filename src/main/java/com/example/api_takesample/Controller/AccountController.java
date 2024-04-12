@@ -23,10 +23,17 @@ private final AccountService accountService;
         return accountService.getAccount();
     }
 
+    @GetMapping("{accountId}")
+    public List<Account> getAccount(@PathVariable Long accountId) {
+        return accountService.getAccountById(accountId);
+    }
+
     @PostMapping
     public void registerNewAccount(@RequestBody Account account) {
         accountService.addNewAccount(account);
     }
+
+
 
     @DeleteMapping(path = "{accountId}")
     public void deleteAccount(@PathVariable("accountId") Long accountId) {

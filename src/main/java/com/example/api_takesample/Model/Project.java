@@ -1,10 +1,13 @@
 package com.example.api_takesample.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
+@Getter
 @Entity
 public class Project {
     @Id
@@ -22,6 +25,18 @@ public class Project {
     private String researchMethod; //phuong phap nghien cuu
     private String describe;
     private LocalDate dateCreate;
+
+    @ManyToMany(mappedBy = "projects")
+    @JsonIgnoreProperties("projects")
+    private List<User> users;
+
+    @OneToMany(mappedBy = "project")
+    @JsonIgnoreProperties("project")
+    private List<Task> tasks;
+
+    @OneToMany(mappedBy = "project")
+    @JsonIgnoreProperties("project")
+    private List<Sample> samples;
 
     public Project() {
     }
@@ -41,39 +56,35 @@ public class Project {
         this.dateCreate = dateCreate;
     }
 
-    public Long getIdProject() {
-        return idProject;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
     public void setProjectName(String projectName) {
         this.projectName = projectName;
-    }
-
-    public String getResearchMethod() {
-        return researchMethod;
     }
 
     public void setResearchMethod(String researchMethod) {
         this.researchMethod = researchMethod;
     }
 
-    public String getDescribe() {
-        return describe;
-    }
-
     public void setDescribe(String describe) {
         this.describe = describe;
     }
 
-    public LocalDate getDateCreate() {
-        return dateCreate;
-    }
-
     public void setDateCreate(LocalDate dateCreate) {
         this.dateCreate = dateCreate;
+    }
+
+    public void setIdProject(Long idProject) {
+        this.idProject = idProject;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void setSamples(List<Sample> samples) {
+        this.samples = samples;
     }
 }

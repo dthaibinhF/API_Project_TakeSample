@@ -1,6 +1,7 @@
 package com.example.api_takesample.Controller;
 
 import com.example.api_takesample.Model.Form;
+import com.example.api_takesample.Model.Picture;
 import com.example.api_takesample.Service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +25,21 @@ public class FormController {
         return formService.getForm();
     }
 
-    @PostMapping
-    public void registerForm(@RequestBody Form form) {
-        formService.addNewForm(form);
+    @GetMapping("{formId}")
+    public List<Form> getFormById(@PathVariable Long formId) {
+        return formService.getFormById(formId);
+    }
+
+    @GetMapping("/sample/{sampleId}")
+    public List<Form> getFormBySampleId(@PathVariable Long sampleId) {
+        return formService.getPictureBySampleId(sampleId);
+    }
+
+    @PostMapping("{sampleId}")
+    public void registerFormInSample(
+            @PathVariable Long sampleId,
+            @RequestBody Form form) {
+        formService.addNewFormInSample(sampleId, form);
     }
 
     @DeleteMapping(path = "{formId}")

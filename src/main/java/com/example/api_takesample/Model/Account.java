@@ -1,9 +1,9 @@
 package com.example.api_takesample.Model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
-import java.util.List;
-
+@Getter
 @Entity
 @Table
 public class Account {
@@ -18,6 +18,7 @@ public class Account {
             generator = "account_sequence"
     )
     private Long idAccount;
+    @Column(unique = true)
     private String username;
     private String password;
 
@@ -35,23 +36,15 @@ public class Account {
         this.password = password;
     }
 
-    public Long getIdAccount() {
-        return idAccount;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setIdAccount(Long idAccount) {
+        this.idAccount = idAccount;
     }
 }

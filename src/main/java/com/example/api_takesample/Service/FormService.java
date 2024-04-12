@@ -1,7 +1,9 @@
 package com.example.api_takesample.Service;
 
 import com.example.api_takesample.Model.Form;
+import com.example.api_takesample.Model.Sample;
 import com.example.api_takesample.Repository.FormRepository;
+import com.example.api_takesample.Repository.SampleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,26 +15,35 @@ import java.util.Optional;
 @Service
 public class FormService {
 
-    FormRepository formRepository;
-
     @Autowired
-    public FormService(FormRepository formRepository) {
-        this.formRepository = formRepository;
-    }
+    FormRepository formRepository;
+    SampleRepository sampleRepository;
 
+    public FormService(FormRepository formRepository, SampleRepository sampleRepository) {
+        this.formRepository = formRepository;
+        this.sampleRepository = sampleRepository;
+    }
 
     public List<Form> getForm() {
         return formRepository.findAll();
     }
 
-    public void addNewForm(Form form) {
-        Optional<Form> optionalForm = formRepository
-                .findById(form.getIdForm());
+    public void addNewFormInSample(Long sampleId, Form form) {
+        boolean isSampleExist = sampleRepository.existsById(sampleId);
+        if (!isSampleExist) throw new IllegalStateException(
+                "Sample with id " + sampleId + " does not exits"
+        );
 
-        if (optionalForm.isPresent())
-            throw new IllegalStateException(
-                    "Form id have taken"
-            );
+        Optional<Form> optionalPicture = formRepository.findById(form.getIdForm());
+
+        if (optionalPicture.isPresent()) throw new IllegalStateException(
+                "Picture id have taken"
+        );
+
+        Optional<Sample> sampleOptional = sampleRepository
+                .findById(sampleId);
+
+        form.setSample(sampleOptional.get());
         formRepository.save(form);
     }
 
@@ -71,5 +82,18 @@ public class FormService {
                 !url.equals(form.getUrl())) {
             form.setUrl(url);
         }
+    }
+
+    public List<Form> getFormById(Long formId) {
+        boolean exist = formRepository.existsById(formId);
+
+        if (!exist) throw new IllegalStateException(
+                "Form with id " + formId + " does not exist"
+        );
+        return formRepository.findFormByIdForm(formId);
+    }
+
+    public List<Form> getPictureBySampleId(Long sampleId) {
+        return formRepository.findFormBySampleIdSample(sampleId);
     }
 }

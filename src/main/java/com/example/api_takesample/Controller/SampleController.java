@@ -24,9 +24,21 @@ public class SampleController {
         return sampleService.getSample();
     }
 
-    @PostMapping
-    public void registerSample(@RequestBody Sample sample) {
-        sampleService.addNewSample(sample);
+    @GetMapping("{sampleId}")
+    public List<Sample> getSampleById(@PathVariable Long sampleId) {
+        return sampleService.getSampleById(sampleId);
+    }
+
+    @GetMapping("/project/{projectId}")
+    public List<Sample> getSampleByProjectId(@PathVariable Long projectId) {
+        return sampleService.getSampleByProjectId(projectId);
+    }
+
+    @PostMapping("/{projectId}")
+    public void registerSample(
+            @PathVariable Long projectId,
+            @RequestBody Sample sample) {
+        sampleService.addNewSampleInProject(projectId, sample);
     }
 
     @DeleteMapping(path = "{sampleId}")

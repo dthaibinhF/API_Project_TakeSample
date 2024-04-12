@@ -24,6 +24,11 @@ public class ProjectController {
         return projectService.getProject();
     }
 
+    @GetMapping("/{projectId}")
+    public List<Project> getProjectById(@PathVariable Long projectId) {
+        return projectService.getProjectById(projectId);
+    }
+
     @PostMapping
     public void registerProject(@RequestBody Project project) {
         projectService.addNewProject(project);
@@ -43,5 +48,11 @@ public class ProjectController {
             @RequestParam(required = false) LocalDate dateCreate
     ) {
         projectService.updateProject(projectId, projectName, researchMethod, describe, dateCreate);
+    }
+
+    @PutMapping("/{projectId}/add/{userId}")
+    public Project addUserToProject(@PathVariable Long userId,
+                                    @PathVariable Long projectId){
+        return projectService.addUserToProject(userId, projectId);
     }
 }

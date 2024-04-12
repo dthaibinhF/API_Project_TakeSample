@@ -1,9 +1,13 @@
 package com.example.api_takesample.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
+@Getter
 @Entity
 @Table
 public class Task {
@@ -22,6 +26,11 @@ public class Task {
     private LocalDate deadline;
     private String direction; //describe the job
 
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    @JsonIgnoreProperties({"tasks", "users", "samples"})
+    private Project project;
+
     public Task() {
     }
 
@@ -38,31 +47,30 @@ public class Task {
         this.direction = direction;
     }
 
-    public Long getIdTask() {
-        return idTask;
-    }
-
-    public LocalDate getStartTime() {
-        return startTime;
+    public Task(LocalDate startTime, LocalDate deadline, String direction, Project project) {
+        this.startTime = startTime;
+        this.deadline = deadline;
+        this.direction = direction;
+        this.project = project;
     }
 
     public void setStartTime(LocalDate startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDate getDeadline() {
-        return deadline;
-    }
-
     public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
-    public String getDirection() {
-        return direction;
-    }
-
     public void setDirection(String direction) {
         this.direction = direction;
+    }
+
+    public void setIdTask(Long idTask) {
+        this.idTask = idTask;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

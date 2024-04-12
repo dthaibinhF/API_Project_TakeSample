@@ -1,6 +1,8 @@
 package com.example.api_takesample.Service;
 
+import com.example.api_takesample.Model.Project;
 import com.example.api_takesample.Model.Task;
+import com.example.api_takesample.Repository.ProjectRepository;
 import com.example.api_takesample.Repository.TaskRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +16,25 @@ import java.util.Optional;
 @Service
 public class TaskService {
 
+    @Autowired
+    ProjectRepository projectRepository;
     TaskRepository taskRepository;
 
-    @Autowired
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(ProjectRepository projectRepository, TaskRepository taskRepository) {
+        this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
     }
-
 
     public List<Task> getTask() {
         return taskRepository.findAll();
     }
 
-    public void addNewTask(Task task) {
+    public void addNewTask(Long projectId, Task task) {
+        boolean isProjectExist = projectRepository.existsById(projectId);
+        if (!isProjectExist) throw new IllegalStateException(
+                "Project with id " + projectId + " does not exits"
+        );
+
         Optional<Task> taskOptional = taskRepository
                 .findById(task.getIdTask());
 
@@ -34,6 +42,10 @@ public class TaskService {
             throw new IllegalStateException(
                     "Task id have taken"
             );
+
+        Optional<Project> projectOptional = projectRepository
+                .findById(projectId);
+        task.setProject(projectOptional.get());
         taskRepository.save(task);
     }
 
@@ -70,5 +82,23 @@ public class TaskService {
                 !Objects.equals(direction, task.getDirection())) {
             task.setDirection(direction);
         }
+    }
+
+    public List<Task> getTaskById(Long taskId) {
+        boolean exist = taskRepository.existsById(taskId);
+
+        if (!exist) throw new IllegalStateException(
+                "Task id " + taskId + " does not exist"
+        );
+
+        return taskRepository.findTaskByIdTask(taskId);
+    }
+
+    public List<Task> getTaskByProjectId(Long projectId) {
+        if (!projectRepository.existsById(projectId))
+            throw new IllegalStateException(
+                    "Project with id " + projectId + " does not exist"
+            );
+        return taskRepository.findTaskByProjectIdProject(projectId);
     }
 }
