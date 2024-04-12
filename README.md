@@ -4,11 +4,11 @@
 
 ### List of accounts
 GET `/api/acount`  
-Return a list of accounts
+Return a list of accounts.
 
 ### Get single account  
 GET `/api/account/:accountId` 
-Return details of account
+Return details of account.
 
 ### Register account
 POST `/api/account`
@@ -16,7 +16,6 @@ Allow you to add new account.
 
 The request body needs to be in JSON format and include the following properties:
 
-- `idAccount` - Long  
 - `username` -  String -use phonenumber to engage  
 - `password` - String
 
@@ -24,11 +23,23 @@ Example:
 ```
 POST /api/account  
 {  
-        "idAccount": 1,  
-        "username": "0939464077",  
-        "password": "1232"  
+        "username": "0123456789",
+        "password": "1232456"
 }  
 ```
+
+### Change password
+PUT `/api/account/:accountId?password=`
+
+Allow you change the password of the account.
+
+Example:
+```
+POST api/account/1?password=0123456783
+```
+
+### Delete account
+you just can only delete it if the user owner deleted.
 
 ## USER  
 
@@ -41,6 +52,127 @@ GET `api/user/:userid`
 Return details of user
 
 ### Register user
+POST `/api/user`
+Allow you to add new user.
+
+The request body needs to be in JSON format and include the following properties:
+- `idUser` - Long  
+- `name` - String  
+- `address` - String  
+- `email` - String  
+- `phoneNumber` - String  
+   
+Example:
+```
+POST /api/user
+{  
+        "name": "Tuyet Ngan",
+        "address": "Thu Duc",
+        "email": "ngan@gmail.com",
+        "phoneNumber": "0123456789"
+}   
+```
+CAUTION: the accoount with the username (phone number) must be add first to the database. Them add new user with exactly phone number. It wil match automaticly.  
+Look 2 example above to more clear.
+
+### Delete User
+DELETE `api/user/:userId`
+Delete an existing user. Causing the account followed deleted.  
+The request body needs to be empty.  
+
+Example:
+```
+DELETE api/user/3
+```
+
+### Update information
+Update an existing user.
+
+The request body needs to be in JSON format and allows you to update the following properties:
+-  `name`
+-  `address`
+-  `email`
+
+Example:
+```
+PUT /api/user/:1?name=Hoang PhiU&address=America&email=phi@gmail.com
+```
+## Project
+### List of accounts
+GET `/api/project`  
+Return a list of [rojects.
+
+### Get single project  
+GET `/api/project/:projectId` 
+Return details of project.
+
+### Register project
+POST `/api/project`
+Allow you to add new user.
+
+The request body needs to be in JSON format and include the following properties:
+- `idProject` - Long  
+- `projectName` - String  
+- `researchMethod` - String  
+- `describe` - String  
+- `dateCreate` - LocalDate  
+   
+Example:
+```
+POST /api/project
+{
+        "idProject": 3,
+        "projectName": "AI for work",
+        "researchMethod": "Code and documentation",
+        "describe": "talking why AI important",
+        "dateCreate": "2024-03-01"
+}
+```
+
+### Assign user
+PUT `/api/project/:projectId/add/:userId`
+Assign exist user to project.
+
+The request body needs to be in JSON format and allows you to update the following properties:
+-  `projectId`
+-  `userId`
+-  `email`
+
+Example:
+```
+PUT /api/project/1/add/1
+```
+
+### Update Project's Information
+PUT `/api/project/:projectId?projectName=&researchMethod=&describe&dateCreate`
+Change information of exist project.
+
+- `idProject` - Long  
+- `projectName` - String  
+- `researchMethod` - String  
+- `describe` - String  
+- `dateCreate` - LocalDate-FORMMAT: YYYY-MM-DD
+
+Example:
+```
+/api/project/:1?projectName=project1&researchMethod=anything&describe=something&dateCreate=2024-04-04
+```
+
+## Task
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## account, user, project, sample, picture, form, task
 
@@ -80,21 +212,7 @@ POST /api/account
 }  
 
 **User**  
-- idUser - Long  
-- name - String  
-- address - String  
-- email - String  
-- phoneNumber - String  
-  
-**POST /api/user**  
 
-{  
-        "idUser": 1,  
-        "name": "Dang Thai Binh",  
-        "address": "Can Tho",  
-        "email": "dthaibinh03@gmail.com",  
-        "phoneNumber": "0939464077"  
-}   
 
 **Project**  
 - idProject - Long  
