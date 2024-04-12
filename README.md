@@ -1,6 +1,17 @@
 # API_Project_TakeSample
 
-## account, user, project, sample, picture, form,
+## USER
+
+
+# List of Users
+GET `/api/user`  
+Return a list of user
+
+# Get one user
+GET `api/user/:userid`  
+Return details of user
+
+## account, user, project, sample, picture, form, task
 
 ### List of data
 GET `/api/acount`  
