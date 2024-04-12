@@ -7,11 +7,11 @@ GET `/api/acount`
 Return a list of accounts.
 
 ### Get single account  
-GET `/api/account/:accountId` 
+GET `/api/account/:accountId`  
 Return details of account.
 
 ### Register account
-POST `/api/account`
+POST `/api/account`  
 Allow you to add new account.
 
 The request body needs to be in JSON format and include the following properties:
@@ -38,7 +38,7 @@ Example:
 POST api/account/1?password=0123456783
 ```
 
-### Delete account
+### Delete account  
 you just can only delete it if the user owner deleted.
 
 ## USER  
@@ -52,7 +52,7 @@ GET `api/user/:userid`
 Return details of user
 
 ### Register user
-POST `/api/user`
+POST `/api/user`  
 Allow you to add new user.
 
 The request body needs to be in JSON format and include the following properties:
@@ -76,8 +76,8 @@ CAUTION: the accoount with the username (phone number) must be add first to the 
 Look 2 example above to more clear.
 
 ### Delete User
-DELETE `api/user/:userId`
-Delete an existing user. Causing the account followed deleted.  
+DELETE `api/user/:userId`  
+Delete an existing user. Causing the account followed deleted.   
 The request body needs to be empty.  
 
 Example:
@@ -103,11 +103,11 @@ GET `/api/project`
 Return a list of [rojects.
 
 ### Get single project  
-GET `/api/project/:projectId` 
+GET `/api/project/:projectId`  
 Return details of project.
 
 ### Register project
-POST `/api/project`
+POST `/api/project`  
 Allow you to add new user.
 
 The request body needs to be in JSON format and include the following properties:
@@ -130,7 +130,7 @@ POST /api/project
 ```
 
 ### Assign user
-PUT `/api/project/:projectId/add/:userId`
+PUT `/api/project/:projectId/add/:userId`  
 Assign exist user to project.
 
 The request body needs to be in JSON format and allows you to update the following properties:
@@ -144,7 +144,7 @@ PUT /api/project/1/add/1
 ```
 
 ### Update Project's Information
-PUT `/api/project/:projectId?projectName=&researchMethod=&describe&dateCreate`
+PUT `/api/project/:projectId?projectName=&researchMethod=&describe&dateCreate`  
 Change information of exist project.
 
 - `idProject` - Long  
@@ -155,12 +155,12 @@ Change information of exist project.
 
 Example:
 ```
-PUT /api/project/:1?projectName=project1&researchMethod=anything&describe=something&dateCreate=2024-04-04
+PUT /api/project/:1?projectName=project1&researchMethod=anything&describe=something&dateCreate=2024-04-04  
 ```
 
 ## Task
 ### List of Tasks
-GET `/api/task`  
+GET `/api/task`   
 Return a list of tasks.
 
 ### Get single task
@@ -168,7 +168,7 @@ GET `api/task/:taskId`
 Return details of task.
 
 ### Adding new task to porject
-POST `/api/task/:projectid`
+POST `/api/task/:projectid`  
 Allow you to add new task to specific exits project.
 
 The request body needs to be in JSON format and include the following properties:
@@ -190,7 +190,7 @@ POST /api/task/1
 ```
 
 ### Delete Task
-DELETE `api/task/:taskId`
+DELETE `api/task/:taskId`  
 Delete an existing task. 
 
 The request body needs to be empty.  
@@ -200,7 +200,7 @@ Example:
 DELETE api/task/2
 ```
 ### Update Task's Information
-PUT `/api/task/:taskId?startTime=&deadline=&direction=`
+PUT `/api/task/:taskId?startTime=&deadline=&direction=`  
 Change information of exist task.
 
 - `idTask` - Long  
@@ -219,11 +219,11 @@ GET `/api/sample`
 Return a list of samples.
 
 ### Get single sample
-GET `api/sample/:sampleId`  
+GET `api/sample/:sampleId`   
 Return details of sample.
 
 ### Adding new sample to porject
-POST `/api/sample/:projectid`
+POST `/api/sample/:projectid`  
 Allow you to add new sample to specific exits project.
 
 The request body needs to be in JSON format and include the following properties:
@@ -243,7 +243,7 @@ POST /api/sample/1
 ```
 
 ### Delete sample
-DELETE `api/sample/:sampleId`
+DELETE `api/sample/:sampleId`  
 Delete an existing sample. Just delete after delete children (form, picture).
 
 The request body needs to be empty.  
@@ -253,7 +253,7 @@ Example:
 DELETE api/sample/2
 ```
 ### Update Sample's Information
-PUT `/api/sample/:sampleId?nameSample=&createDate=`
+PUT `/api/sample/:sampleId?nameSample=&createDate=`  
 Change information of exist sample.
 
 - `idSample` - Long
@@ -267,15 +267,15 @@ PUT api/sample/:sampleId?nameSample=sample1&createDate=
 
 ### Picture
 ### List of pictures
-GET `/api/picture`  
+GET `/api/picture`   
 Return a list of pictures.
 
 ### Get single picture
-GET `api/picture/:pictureId`  
+GET `api/picture/:pictureId`   
 Return details of picture.
 
 ### Adding new picture to sample
-POST `/api/picture/:sampleId`
+POST `/api/picture/:sampleId`  
 Allow you to add new picture to specific exits sample.
 
 The request body needs to be in JSON format and include the following properties:
@@ -296,7 +296,7 @@ POST /api/picture/1
 ```
 
 ### Delete picture
-DELETE `api/picture/:pictureId`
+DELETE `api/picture/:pictureId`  
 Delete an existing picture.
 
 The request body needs to be empty.  
@@ -306,7 +306,7 @@ Example:
 DELETE api/picture/2
 ```
 ### Update picture's Information
-PUT `/api/picture/:pictureId?namePicture=&describe=&url=`
+PUT `/api/picture/:pictureId?namePicture=&describe=&url=`  
 Change information of exist sample.
 
 - `idPicture` - Long
@@ -329,7 +329,7 @@ GET `api/form/:formId`
 Return details of form.
 
 ### Adding new form to sample
-POST `/api/form/:form`
+POST `/api/form/:form`  
 Allow you to add new picture to specific exits sample.
 
 The request body needs to be in JSON format and include the following properties:
@@ -350,7 +350,7 @@ POST /api/picture/1
 ```
 
 ### Delete form
-DELETE `api/form/:formId`
+DELETE `api/form/:formId`  
 Delete an existing form.
 
 The request body needs to be empty.  
@@ -361,7 +361,7 @@ DELETE api/form/2
 ```
 
 ### Update from's Information
-PUT `api/form/:formId?nameForm=&createDate=&url=`
+PUT `api/form/:formId?nameForm=&createDate=&url=`  
 Change information of exist sample.
 
 - `idForm` - Long
