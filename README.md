@@ -1,15 +1,46 @@
 # API_Project_TakeSample
 
-## USER
+## Account
 
+### List of accounts
+GET `/api/acount`  
+Return a list of accounts
 
-# List of Users
+### Get single account  
+GET `/api/account/:accountId` 
+Return details of account
+
+### Register account
+POST `/api/account`
+Allow you to add new account.
+
+The request body needs to be in JSON format and include the following properties:
+
+- `idAccount` - Long  
+- `username` -  String -use phonenumber to engage  
+- `password` - String
+
+Example:
+```
+POST /api/account  
+{  
+        "idAccount": 1,  
+        "username": "0939464077",  
+        "password": "1232"  
+}  
+```
+
+## USER  
+
+### List of Users
 GET `/api/user`  
 Return a list of user
 
-# Get one user
+### Get one user
 GET `api/user/:userid`  
 Return details of user
+
+### Register user
 
 ## account, user, project, sample, picture, form, task
 
